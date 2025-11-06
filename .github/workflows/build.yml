@@ -2,9 +2,7 @@ name: Build Win32 App
 
 on:
   push:
-    branches: [ main, master ]
   pull_request:
-    branches: [ main, master ]
 
 jobs:
   build:
@@ -24,3 +22,12 @@ jobs:
       with:
         name: win32-app
         path: build/Release/*.exe
+    
+    - name: Create Release
+      if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master'
+      uses: softprops/action-gh-release@v1
+      with:
+        tag_name: v${{ github.run_number }}
+        name: Release v${{ github.run_number }}
+        files: build/Release/*.exe
+        generate_release_notes: true
