@@ -1,4 +1,4 @@
-//модуль игры
+//РјРѕРґСѓР»СЊ РёРіСЂС‹
 #ifndef MAIN_UNIT
  #define MAIN_UNIT
 
@@ -8,24 +8,24 @@
 
  namespace game
  {
-	class field //класс игровое поле
+	class field //РєР»Р°СЃСЃ РёРіСЂРѕРІРѕРµ РїРѕР»Рµ
 	{
 	   private:
-		  unsigned ctowers, crings; //колец и башен
-		  unsigned nhod; //номер хода
-		  hanoy::tower* towers; //массив башен
+		  unsigned ctowers, crings; //РєРѕР»РµС† Рё Р±Р°С€РµРЅ
+		  unsigned nhod; //РЅРѕРјРµСЂ С…РѕРґР°
+		  hanoy::tower* towers; //РјР°СЃСЃРёРІ Р±Р°С€РµРЅ
 		  unsigned window_width, window_height;
-		  unsigned selectTower; //индекс выделенной башни
-		  unsigned targetTower; //индекс башни назначения (OnMouseMove)
-		  bool isInRefreshZone(RECT &targetArea /*что*/, RECT &refreshArea /*зона*/) const;
+		  unsigned selectTower; //РёРЅРґРµРєСЃ РІС‹РґРµР»РµРЅРЅРѕР№ Р±Р°С€РЅРё
+		  unsigned targetTower; //РёРЅРґРµРєСЃ Р±Р°С€РЅРё РЅР°Р·РЅР°С‡РµРЅРёСЏ (OnMouseMove)
+		  bool isInRefreshZone(RECT &targetArea /*С‡С‚Рѕ*/, RECT &refreshArea /*Р·РѕРЅР°*/) const;
 		  HFONT hFont;
        public:
-		  field(unsigned /*башен*/, unsigned/*колец*/);
-		  void Start(); //запуск игры
-		  void Show(HDC &hdc/*дескриптор холста*/, RECT& drawRect/*зона обновления*/); //отоюражение колец
+		  field(unsigned /*Р±Р°С€РµРЅ*/, unsigned/*РєРѕР»РµС†*/);
+		  void Start(); //Р·Р°РїСѓСЃРє РёРіСЂС‹
+		  void Show(HDC &hdc/*РґРµСЃРєСЂРёРїС‚РѕСЂ С…РѕР»СЃС‚Р°*/, RECT& drawRect/*Р·РѕРЅР° РѕР±РЅРѕРІР»РµРЅРёСЏ*/); //РѕС‚РѕСЋСЂР°Р¶РµРЅРёРµ РєРѕР»РµС†
 
-		  unsigned GetTowersIndex(int x, int y) const; //вернуть номер башни
-		  bool Move(unsigned p1, unsigned p2); //переместить кольца
+		  unsigned GetTowersIndex(int x, int y) const; //РІРµСЂРЅСѓС‚СЊ РЅРѕРјРµСЂ Р±Р°С€РЅРё
+		  bool Move(unsigned p1, unsigned p2); //РїРµСЂРµРјРµСЃС‚РёС‚СЊ РєРѕР»СЊС†Р°
 		  inline void setSelectTower(unsigned c) {selectTower=c;};
 		  inline void setTargetTower(unsigned c) {targetTower=c;};
 		  

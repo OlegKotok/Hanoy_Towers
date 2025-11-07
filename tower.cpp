@@ -1,21 +1,21 @@
-//реализация класса
+//СЂРµР°Р»РёР·Р°С†РёСЏ РєР»Р°СЃСЃР°
 #include "tower.h"
 
 namespace hanoy
 {
 	tower::tower()
 	{
-		*a=0; //самый нижний
-		c=0; //количество добавленых елементов
-		b=a; //верхний елемент
+		*a=0; //СЃР°РјС‹Р№ РЅРёР¶РЅРёР№
+		c=0; //РєРѕР»РёС‡РµСЃС‚РІРѕ РґРѕР±Р°РІР»РµРЅС‹С… РµР»РµРјРµРЅС‚РѕРІ
+		b=a; //РІРµСЂС…РЅРёР№ РµР»РµРјРµРЅС‚
 	};
 	
 	tower::tower(small n)
 	{
-		*a=0; //самый нижний
+		*a=0; //СЃР°РјС‹Р№ РЅРёР¶РЅРёР№
 		for(small j=n; j>0; j--) a[n+1-j]=j;
-		c=n; //количество добавленых елементов
-		b=a+n;//верхний елемент
+		c=n; //РєРѕР»РёС‡РµСЃС‚РІРѕ РґРѕР±Р°РІР»РµРЅС‹С… РµР»РµРјРµРЅС‚РѕРІ
+		b=a+n;//РІРµСЂС…РЅРёР№ РµР»РµРјРµРЅС‚
 	};
 
 	bool tower::can_add(small d) const
@@ -26,16 +26,16 @@ namespace hanoy
 
 	bool tower::is_full(small height) const
 	{
-		//определить высоту башни
+		//РѕРїСЂРµРґРµР»РёС‚СЊ РІС‹СЃРѕС‚Сѓ Р±Р°С€РЅРё
 		return (height==c);
 	};
 
 
 	bool tower::put(small g)
 	{
-		if (g && ((g<*b)||(*b==0))) //ноль не ставить. ставить только болеше нижнего
+		if (g && ((g<*b)||(*b==0))) //РЅРѕР»СЊ РЅРµ СЃС‚Р°РІРёС‚СЊ. СЃС‚Р°РІРёС‚СЊ С‚РѕР»СЊРєРѕ Р±РѕР»РµС€Рµ РЅРёР¶РЅРµРіРѕ
 		{
-			*++b=g; //добавить елемент g
+			*++b=g; //РґРѕР±Р°РІРёС‚СЊ РµР»РµРјРµРЅС‚ g
 			c++;
 			return true;
 		}
@@ -47,20 +47,20 @@ namespace hanoy
 			c--;
 			return *b--;
 		}
-		else return 0; //нет обьектов
+		else return 0; //РЅРµС‚ РѕР±СЊРµРєС‚РѕРІ
 	};
 
-////////////////////Операторные функции//////////////////////
+////////////////////РћРїРµСЂР°С‚РѕСЂРЅС‹Рµ С„СѓРЅРєС†РёРё//////////////////////
 
 	bool operator<<(tower &a, tower &b)
 	{
 		small tmp=b.get();
 		if (a.can_add(tmp)){
 			a.put(tmp); 
-			return true;  //передвинули успешно
+			return true;  //РїРµСЂРµРґРІРёРЅСѓР»Рё СѓСЃРїРµС€РЅРѕ
 		}
 		else {
-			b.put(tmp); //вставляем назад
+			b.put(tmp); //РІСЃС‚Р°РІР»СЏРµРј РЅР°Р·Р°Рґ
 			return false;
 		}
 	};
@@ -70,46 +70,46 @@ namespace hanoy
 		small tmp=b.get();
 		if (a.can_add(tmp)){
 			a.put(tmp);
-			return true; //передвинули успешно
+			return true; //РїРµСЂРµРґРІРёРЅСѓР»Рё СѓСЃРїРµС€РЅРѕ
 		}
 		else {
-			b.put(tmp); //вставляем назад
+			b.put(tmp); //РІСЃС‚Р°РІР»СЏРµРј РЅР°Р·Р°Рґ
 			return false;
 		}
 	};
 
-	void tower::Show( HDC &dc, /*на чем рисуем*/
+	void tower::Show( HDC &dc, /*РЅР° С‡РµРј СЂРёСЃСѓРµРј*/
 					  unsigned position,
-					  HPEN &borderPen, /*обводка*/
-				      HBRUSH &borderBrush, /*заливка*/
-					  HPEN &towerPen, /*цвет башен*/
-				      HBRUSH &ringBrush0, HBRUSH &ringBrush1, /*обводка и заливка колец*/
+					  HPEN &borderPen, /*РѕР±РІРѕРґРєР°*/
+				      HBRUSH &borderBrush, /*Р·Р°Р»РёРІРєР°*/
+					  HPEN &towerPen, /*С†РІРµС‚ Р±Р°С€РµРЅ*/
+				      HBRUSH &ringBrush0, HBRUSH &ringBrush1, /*РѕР±РІРѕРґРєР° Рё Р·Р°Р»РёРІРєР° РєРѕР»РµС†*/
 					  HFONT& Font
 					)
 	{
-		const unsigned x0=40+(5*40+30)*position/*от нуля*/;
+		const unsigned x0=40+(5*40+30)*position/*РѕС‚ РЅСѓР»СЏ*/;
 		const unsigned y0=80;
-		//рисуем обводку
+		//СЂРёСЃСѓРµРј РѕР±РІРѕРґРєСѓ
 		SelectPen(dc, borderPen);
         SelectBrush(dc, borderBrush);
         Rectangle(dc, x0, y0, x0+40*5, y0+40*7+1);
-		//рисуем стержень
+		//СЂРёСЃСѓРµРј СЃС‚РµСЂР¶РµРЅСЊ
 		SelectPen(dc, towerPen);
 		MoveToEx(dc, x0+1, y0+7*40-1, NULL);
 		LineTo(dc, x0+5*40-1, y0+7*40-1);
 		MoveToEx(dc, x0+100, y0+40, NULL);
 		LineTo(dc, x0+100, y0+7*40-1);
-		//рисуем кольца
-		SelectPen(dc, GetStockPen(BLACK_PEN)); //карандаш
+		//СЂРёСЃСѓРµРј РєРѕР»СЊС†Р°
+		SelectPen(dc, GetStockPen(BLACK_PEN)); //РєР°СЂР°РЅРґР°С€
 		unsigned x1, y, x2;
 		if (c) for (unsigned i=1; i<=c; i++) {
-			SelectBrush(dc, ((a[i]%2)?ringBrush1:ringBrush0)); //определяем цвет
+			SelectBrush(dc, ((a[i]%2)?ringBrush1:ringBrush0)); //РѕРїСЂРµРґРµР»СЏРµРј С†РІРµС‚
 			y=y0+7*40 - (i*13) - 3;
 			x1=x0+100 - 5 - a[i]*6;
 			x2=x0+100 + 5 + a[i]*6;
 			Rectangle(dc, x1, y, x2, y+12);
 		};
-		//добавляем надпись
+		//РґРѕР±Р°РІР»СЏРµРј РЅР°РґРїРёСЃСЊ
 		RECT text_zone;
 		char i='A'+position;
 		text_zone.left=x0+80+1; text_zone.right=text_zone.left+40;

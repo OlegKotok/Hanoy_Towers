@@ -3,17 +3,17 @@
  
  namespace colors{
 		  //const COLORREF border0=RGB(255, 255, 192);
-		  //const COLORREF border1=RGB(184,255,164); //цвет заливки
+		  //const COLORREF border1=RGB(184,255,164); //С†РІРµС‚ Р·Р°Р»РёРІРєРё
 	      const COLORREF tower0=RGB(168, 82, 32);
-		  const COLORREF tower1=RGB(0, 128, 0); //цвет башен
+		  const COLORREF tower1=RGB(0, 128, 0); //С†РІРµС‚ Р±Р°С€РµРЅ
 		  const COLORREF ring0=RGB(0, 0, 255);
-		  const COLORREF ring1=RGB(255, 128, 64); //цвет колец
+		  const COLORREF ring1=RGB(255, 128, 64); //С†РІРµС‚ РєРѕР»РµС†
 		  const COLORREF selectColor1=RGB(235, 255, 245);
-		  const COLORREF selectColor2=RGB(255, 255, 224); //цвет колец
+		  const COLORREF selectColor2=RGB(255, 255, 224); //С†РІРµС‚ РєРѕР»РµС†
 
-		  HPEN borderPen, towerPen0, towerPen1, linePen; //карандаши
-		  HBRUSH borderBrush, ringBrush0, ringBrush1, selectBrush; //зарисовка
+		  HPEN borderPen, towerPen0, towerPen1, linePen; //РєР°СЂР°РЅРґР°С€Рё
+		  HBRUSH borderBrush, ringBrush0, ringBrush1, selectBrush; //Р·Р°СЂРёСЃРѕРІРєР°
 
- }; //цвета игровых обьектов
+ }; //С†РІРµС‚Р° РёРіСЂРѕРІС‹С… РѕР±СЊРµРєС‚РѕРІ
 
 #endif

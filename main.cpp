@@ -1,4 +1,4 @@
-//скелет игры
+//СЃРєРµР»РµС‚ РёРіСЂС‹
 #include <windows.h>
 #include <windowsx.h>
 #include <sstream>
@@ -6,65 +6,65 @@
 #include "game.h"
 #include <string.h>
 
-unsigned N=10, M=3; //количество колец и башен
-const char className[]="gameForm"; //имя класса окна
-HWND main_window; //дескриптор главного окна
+unsigned N=10, M=3; //РєРѕР»РёС‡РµСЃС‚РІРѕ РєРѕР»РµС† Рё Р±Р°С€РµРЅ
+const char className[]="gameForm"; //РёРјСЏ РєР»Р°СЃСЃР° РѕРєРЅР°
+HWND main_window; //РґРµСЃРєСЂРёРїС‚РѕСЂ РіР»Р°РІРЅРѕРіРѕ РѕРєРЅР°
 
-game::field *gamefield; //!обьявляем класс игры
+game::field *gamefield; //!РѕР±СЊСЏРІР»СЏРµРј РєР»Р°СЃСЃ РёРіСЂС‹
 
-//прототипы функций
-LRESULT CALLBACK WinProc(HWND, UINT, WPARAM, LPARAM); //оконная функция для обработки событий окна
+//РїСЂРѕС‚РѕС‚РёРїС‹ С„СѓРЅРєС†РёР№
+LRESULT CALLBACK WinProc(HWND, UINT, WPARAM, LPARAM); //РѕРєРѕРЅРЅР°СЏ С„СѓРЅРєС†РёСЏ РґР»СЏ РѕР±СЂР°Р±РѕС‚РєРё СЃРѕР±С‹С‚РёР№ РѕРєРЅР°
 BOOL OnCreate(HWND, void*);
 void OnPaint(HWND);
 void OnDestroy(HWND);
 void OnClick(HWND, BOOL, int, int, UINT);
 void OnMouseMove(HWND, int, int, UINT);
-RECT arrowArea; //зона рисования стрелки
+RECT arrowArea; //Р·РѕРЅР° СЂРёСЃРѕРІР°РЅРёСЏ СЃС‚СЂРµР»РєРё
 void ShowGameInfo();
 
 
-int WINAPI WinMain(HINSTANCE hThisInstance /* дескриптор приложения */,
-                   HINSTANCE, LPSTR cmdLine, int showStyle /* режим показа окна */)
+int WINAPI WinMain(HINSTANCE hThisInstance /* РґРµСЃРєСЂРёРїС‚РѕСЂ РїСЂРёР»РѕР¶РµРЅРёСЏ */,
+                   HINSTANCE, LPSTR cmdLine, int showStyle /* СЂРµР¶РёРј РїРѕРєР°Р·Р° РѕРєРЅР° */)
 
 {
-	//определяем параметры игры
+	//РѕРїСЂРµРґРµР»СЏРµРј РїР°СЂР°РјРµС‚СЂС‹ РёРіСЂС‹
 	std::stringstream s;
 	s<<cmdLine;
 	s>>M>>N;
 	if (M<3) M=3;
 	if (M>5) M=5;
 
-	if (N<M) N=M; //ограничение минимума колец
+	if (N<M) N=M; //РѕРіСЂР°РЅРёС‡РµРЅРёРµ РјРёРЅРёРјСѓРјР° РєРѕР»РµС†
 	if (N>M*5) N=M*5;
 
-	gamefield=new game::field(M, N); //!создаем класс игры
+	gamefield=new game::field(M, N); //!СЃРѕР·РґР°РµРј РєР»Р°СЃСЃ РёРіСЂС‹
     
-	//создадим класс окна
-    WNDCLASSEX wc; //дескриптор класса окна
+	//СЃРѕР·РґР°РґРёРј РєР»Р°СЃСЃ РѕРєРЅР°
+    WNDCLASSEX wc; //РґРµСЃРєСЂРёРїС‚РѕСЂ РєР»Р°СЃСЃР° РѕРєРЅР°
     ZeroMemory(&wc, sizeof(wc));
-    wc.hInstance=hThisInstance; //дескриптор приложения
-    wc.lpszClassName=className; //имя класса
-    wc.lpfnWndProc=WinProc; //функция обработки событий
+    wc.hInstance=hThisInstance; //РґРµСЃРєСЂРёРїС‚РѕСЂ РїСЂРёР»РѕР¶РµРЅРёСЏ
+    wc.lpszClassName=className; //РёРјСЏ РєР»Р°СЃСЃР°
+    wc.lpfnWndProc=WinProc; //С„СѓРЅРєС†РёСЏ РѕР±СЂР°Р±РѕС‚РєРё СЃРѕР±С‹С‚РёР№
     wc.cbSize = sizeof(WNDCLASSEX);
 
-    wc.style=CS_VREDRAW|CS_VREDRAW; //разрешаем автоматическую перерисовку
-    wc.hIcon=LoadIcon(NULL, IDI_APPLICATION); //устанавливаем иконку Windows
-    wc.hCursor=LoadCursor(NULL, IDC_ARROW); //устанавливаем курсор Windows
+    wc.style=CS_VREDRAW|CS_VREDRAW; //СЂР°Р·СЂРµС€Р°РµРј Р°РІС‚РѕРјР°С‚РёС‡РµСЃРєСѓСЋ РїРµСЂРµСЂРёСЃРѕРІРєСѓ
+    wc.hIcon=LoadIcon(NULL, IDI_APPLICATION); //СѓСЃС‚Р°РЅР°РІР»РёРІР°РµРј РёРєРѕРЅРєСѓ Windows
+    wc.hCursor=LoadCursor(NULL, IDC_ARROW); //СѓСЃС‚Р°РЅР°РІР»РёРІР°РµРј РєСѓСЂСЃРѕСЂ Windows
     wc.lpszMenuName = NULL; /* No menu */
-    wc.hbrBackground=(HBRUSH)GetStockObject(WHITE_BRUSH); //белый фон
+    wc.hbrBackground=(HBRUSH)GetStockObject(WHITE_BRUSH); //Р±РµР»С‹Р№ С„РѕРЅ
 
-    RegisterClassEx(&wc); //регестрируем класс окна
+    RegisterClassEx(&wc); //СЂРµРіРµСЃС‚СЂРёСЂСѓРµРј РєР»Р°СЃСЃ РѕРєРЅР°
 
-    //Создаем окно
-    main_window=CreateWindow( className, "Кольца наркоманов 2", /*имя класса и заголовок */
-							  WS_OVERLAPPEDWINDOW, 35, 40, gamefield->GetWindowWidth()+10, gamefield->GetWindowHeight()+27, /* стиль окна, позиция и размеры */
-                              HWND_DESKTOP, NULL /* No menu */, hThisInstance /*дескриптор приложения*/, NULL /*доп.данные*/
+    //РЎРѕР·РґР°РµРј РѕРєРЅРѕ
+    main_window=CreateWindow( className, "РљРѕР»СЊС†Р° РЅР°СЂРєРѕРјР°РЅРѕРІ 2", /*РёРјСЏ РєР»Р°СЃСЃР° Рё Р·Р°РіРѕР»РѕРІРѕРє */
+							  WS_OVERLAPPEDWINDOW, 35, 40, gamefield->GetWindowWidth()+10, gamefield->GetWindowHeight()+27, /* СЃС‚РёР»СЊ РѕРєРЅР°, РїРѕР·РёС†РёСЏ Рё СЂР°Р·РјРµСЂС‹ */
+                              HWND_DESKTOP, NULL /* No menu */, hThisInstance /*РґРµСЃРєСЂРёРїС‚РѕСЂ РїСЂРёР»РѕР¶РµРЅРёСЏ*/, NULL /*РґРѕРї.РґР°РЅРЅС‹Рµ*/
                              );
 
-    ShowWindow(main_window, showStyle); //отображаем окно
+    ShowWindow(main_window, showStyle); //РѕС‚РѕР±СЂР°Р¶Р°РµРј РѕРєРЅРѕ
 
 
-    //обработка сообщений
+    //РѕР±СЂР°Р±РѕС‚РєР° СЃРѕРѕР±С‰РµРЅРёР№
     MSG msg;
     while(GetMessage(&msg, NULL, 0, 0))
     {
@@ -88,12 +88,12 @@ LRESULT CALLBACK WinProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
 		 HANDLE_MSG(hwnd, WM_DESTROY, OnDestroy);
 		 HANDLE_MSG(hwnd, WM_LBUTTONDOWN, OnClick);
 		 HANDLE_MSG(hwnd, WM_MOUSEMOVE, OnMouseMove);
-         default: return DefWindowProc(hwnd, msg, wParam, lParam); //обработка поумолчанию
+         default: return DefWindowProc(hwnd, msg, wParam, lParam); //РѕР±СЂР°Р±РѕС‚РєР° РїРѕСѓРјРѕР»С‡Р°РЅРёСЋ
     }
     return 0;
 }
 
-//функции-обработчики
+//С„СѓРЅРєС†РёРё-РѕР±СЂР°Р±РѕС‚С‡РёРєРё
 BOOL OnCreate(HWND hwnd, void*)
 {
     gamefield->Start();
@@ -106,7 +106,7 @@ void OnPaint(HWND hwnd)
 {
     PAINTSTRUCT paintstruct;
     HDC hdc=BeginPaint(hwnd, &paintstruct);
-	gamefield->Show(hdc, paintstruct.rcPaint);//рисуем
+	gamefield->Show(hdc, paintstruct.rcPaint);//СЂРёСЃСѓРµРј
     EndPaint(hwnd, &paintstruct);
 	static bool firstshow=true;
 	if (firstshow){
@@ -117,28 +117,28 @@ void OnPaint(HWND hwnd)
 
 void OnDestroy(HWND hwnd)
 {
-    delete gamefield; //удаляем игру
+    delete gamefield; //СѓРґР°Р»СЏРµРј РёРіСЂСѓ
 	PostQuitMessage(0);
 }
 
 void ShowGameInfo()
 {
-	char msg[80]="Соберите все ";
+	char msg[80]="РЎРѕР±РµСЂРёС‚Рµ РІСЃРµ ";
 	char tmp[4]; _itoa(N, tmp, 10);
 	strcat(msg, tmp);
-	strcat(msg, " колец на последней (справа) башне!");
-	MessageBox(main_window, msg, "Кольца наркоманов 2", MB_OK|MB_ICONINFORMATION);
+	strcat(msg, " РєРѕР»РµС† РЅР° РїРѕСЃР»РµРґРЅРµР№ (СЃРїСЂР°РІР°) Р±Р°С€РЅРµ!");
+	MessageBox(main_window, msg, "РљРѕР»СЊС†Р° РЅР°СЂРєРѕРјР°РЅРѕРІ 2", MB_OK|MB_ICONINFORMATION);
 }
 
 //////////////////////////////////////////////////////////////////////////
 
 
-static bool fSelectFirstTower=false;  //выделена первая башня для перемещения
+static bool fSelectFirstTower=false;  //РІС‹РґРµР»РµРЅР° РїРµСЂРІР°СЏ Р±Р°С€РЅСЏ РґР»СЏ РїРµСЂРµРјРµС‰РµРЅРёСЏ
 
 void OnClick(HWND hwnd, BOOL fdbclick, int x, int y, UINT keyFlugs)
 {
 	static unsigned fromTower, toTower;
-	unsigned position=gamefield->GetTowersIndex(x, y); //получаем номер башни
+	unsigned position=gamefield->GetTowersIndex(x, y); //РїРѕР»СѓС‡Р°РµРј РЅРѕРјРµСЂ Р±Р°С€РЅРё
 	RECT towerRect;
 
 	if (position){
@@ -146,38 +146,38 @@ void OnClick(HWND hwnd, BOOL fdbclick, int x, int y, UINT keyFlugs)
 
 			fromTower=position;
 			fSelectFirstTower=true;
-			gamefield->setSelectTower(position); //выделенная башня
-			//определяем зону перерисовки
+			gamefield->setSelectTower(position); //РІС‹РґРµР»РµРЅРЅР°СЏ Р±Р°С€РЅСЏ
+			//РѕРїСЂРµРґРµР»СЏРµРј Р·РѕРЅСѓ РїРµСЂРµСЂРёСЃРѕРІРєРё
 			towerRect.left=40 + (5*40+30)*(position-1);
 			towerRect.right=towerRect.left+200;
 			towerRect.top=80; towerRect.bottom=80+40*7+2;
-			RedrawWindow(main_window, &towerRect, NULL, RDW_NOERASE|RDW_NOFRAME|RDW_INVALIDATE); //зарисовываем исходную башню
+			RedrawWindow(main_window, &towerRect, NULL, RDW_NOERASE|RDW_NOFRAME|RDW_INVALIDATE); //Р·Р°СЂРёСЃРѕРІС‹РІР°РµРј РёСЃС…РѕРґРЅСѓСЋ Р±Р°С€РЅСЋ
 		}
 		else if (position!=fromTower){
-			//перемещение разрешено
+			//РїРµСЂРµРјРµС‰РµРЅРёРµ СЂР°Р·СЂРµС€РµРЅРѕ
 			toTower=position;
 			if (gamefield->Move(fromTower-1, toTower-1)) {
-				//перемещение
+				//РїРµСЂРµРјРµС‰РµРЅРёРµ
 				fSelectFirstTower=false;
-				gamefield->setSelectTower(0); //снять выделение
+				gamefield->setSelectTower(0); //СЃРЅСЏС‚СЊ РІС‹РґРµР»РµРЅРёРµ
 				gamefield->setTargetTower(0);
 
-				//тест на выиграш
+				//С‚РµСЃС‚ РЅР° РІС‹РёРіСЂР°С€
 				if (gamefield->is_win()) {
-					char msg[80]="Поздравляем! Вы прошли игру за "; msg[12]='\n';
+					char msg[80]="РџРѕР·РґСЂР°РІР»СЏРµРј! Р’С‹ РїСЂРѕС€Р»Рё РёРіСЂСѓ Р·Р° "; msg[12]='\n';
 					char tmp[4]; _itoa(gamefield->getTurnNumber(), tmp, 10);
 					strcat(msg, tmp);
-					strcat(msg, " ходов.");
+					strcat(msg, " С…РѕРґРѕРІ.");
 
-					MessageBox(main_window, msg, "Вы выиграли.", MB_OK|MB_ICONINFORMATION);
+					MessageBox(main_window, msg, "Р’С‹ РІС‹РёРіСЂР°Р»Рё.", MB_OK|MB_ICONINFORMATION);
 				};
 			}
 			else {
 				fSelectFirstTower=true;
-				gamefield->setSelectTower(position); //новое выделение
-				fromTower=position; //!новая исходная позиция
+				gamefield->setSelectTower(position); //РЅРѕРІРѕРµ РІС‹РґРµР»РµРЅРёРµ
+				fromTower=position; //!РЅРѕРІР°СЏ РёСЃС…РѕРґРЅР°СЏ РїРѕР·РёС†РёСЏ
 			}
-			RedrawWindow(main_window, NULL, NULL, RDW_NOFRAME|RDW_ERASE|RDW_INVALIDATE|RDW_ERASENOW|RDW_UPDATENOW|RDW_INTERNALPAINT); //полное обновление окна
+			RedrawWindow(main_window, NULL, NULL, RDW_NOFRAME|RDW_ERASE|RDW_INVALIDATE|RDW_ERASENOW|RDW_UPDATENOW|RDW_INTERNALPAINT); //РїРѕР»РЅРѕРµ РѕР±РЅРѕРІР»РµРЅРёРµ РѕРєРЅР°
 		};
 	};
 };
@@ -186,10 +186,10 @@ void OnMouseMove(HWND hwnd, int x, int y, UINT keyFlugs)
 {
 	static unsigned firstSelect, predSelect=0;
 	if (fSelectFirstTower) {
-		firstSelect=gamefield->GetTowersIndex(x, y); //на какую башню наведена мыша
+		firstSelect=gamefield->GetTowersIndex(x, y); //РЅР° РєР°РєСѓСЋ Р±Р°С€РЅСЋ РЅР°РІРµРґРµРЅР° РјС‹С€Р°
 		if (firstSelect!=predSelect){
 			gamefield->setTargetTower(firstSelect);
-			RedrawWindow(main_window, &arrowArea, NULL, RDW_NOFRAME|RDW_ERASE|RDW_INVALIDATE|RDW_ERASENOW|RDW_UPDATENOW); //принудительный показ
+			RedrawWindow(main_window, &arrowArea, NULL, RDW_NOFRAME|RDW_ERASE|RDW_INVALIDATE|RDW_ERASENOW|RDW_UPDATENOW); //РїСЂРёРЅСѓРґРёС‚РµР»СЊРЅС‹Р№ РїРѕРєР°Р·
 		};
 		predSelect=firstSelect;
 	};

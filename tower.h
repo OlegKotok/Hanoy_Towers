@@ -3,37 +3,37 @@
  #include <windows.h>
  #include <windowsx.h>
  typedef unsigned small;
- //описание класса Tower
+ //РѕРїРёСЃР°РЅРёРµ РєР»Р°СЃСЃР° Tower
 
  namespace hanoy
  {
   class tower
   {
     private:  
-	  small a[100]; //шпиндель с низу в верх
-	  small *b;		//самый верхний елемент шпинделя
-	  small c;		//счетчик елементов
+	  small a[100]; //С€РїРёРЅРґРµР»СЊ СЃ РЅРёР·Сѓ РІ РІРµСЂС…
+	  small *b;		//СЃР°РјС‹Р№ РІРµСЂС…РЅРёР№ РµР»РµРјРµРЅС‚ С€РїРёРЅРґРµР»СЏ
+	  small c;		//СЃС‡РµС‚С‡РёРє РµР»РµРјРµРЅС‚РѕРІ
 	public:
 	  tower();
-	  tower(small n); //конструктор
-	  bool put(small g); //добавить елемент g.
-	  small get(); //забрать верхний елемент
+	  tower(small n); //РєРѕРЅСЃС‚СЂСѓРєС‚РѕСЂ
+	  bool put(small g); //РґРѕР±Р°РІРёС‚СЊ РµР»РµРјРµРЅС‚ g.
+	  small get(); //Р·Р°Р±СЂР°С‚СЊ РІРµСЂС…РЅРёР№ РµР»РµРјРµРЅС‚
 
-	  bool is_full(small height) const; //вернуть количество елементов
-	  bool can_add(small d) const; //возможность добавить елемент
+	  bool is_full(small height) const; //РІРµСЂРЅСѓС‚СЊ РєРѕР»РёС‡РµСЃС‚РІРѕ РµР»РµРјРµРЅС‚РѕРІ
+	  bool can_add(small d) const; //РІРѕР·РјРѕР¶РЅРѕСЃС‚СЊ РґРѕР±Р°РІРёС‚СЊ РµР»РµРјРµРЅС‚
 
-	  void Show( HDC &dc, /*на чем рисуем*/
+	  void Show( HDC &dc, /*РЅР° С‡РµРј СЂРёСЃСѓРµРј*/
 				 unsigned position,
-				 HPEN &borderPen, /*обводка*/
-				 HBRUSH &borderBrush, /*заливка*/
-				 HPEN &towerPen, /*цвет башен*/
-				 HBRUSH &ringBrush0, HBRUSH &ringBrush1, /*обводка и заливка колец*/
-				 HFONT& Font /*шрифт*/
+				 HPEN &borderPen, /*РѕР±РІРѕРґРєР°*/
+				 HBRUSH &borderBrush, /*Р·Р°Р»РёРІРєР°*/
+				 HPEN &towerPen, /*С†РІРµС‚ Р±Р°С€РµРЅ*/
+				 HBRUSH &ringBrush0, HBRUSH &ringBrush1, /*РѕР±РІРѕРґРєР° Рё Р·Р°Р»РёРІРєР° РєРѕР»РµС†*/
+				 HFONT& Font /*С€СЂРёС„С‚*/
 			    );
 
     friend bool operator<<(tower &a, tower &b);
 	friend bool operator>>(tower &b, tower &a);
-	//friend void PrintTowewrs(tower &A, tower &B, tower &C); //вывод башен
+	//friend void PrintTowewrs(tower &A, tower &B, tower &C); //РІС‹РІРѕРґ Р±Р°С€РµРЅ
   };
  };
 #endif

@@ -9,27 +9,27 @@
  {
 	 field::field(unsigned m, unsigned n):ctowers(m), crings(n), selectTower(0), targetTower(0)
 	 {
-		 //îïðåäåëÿåì ðàçìåðû îêíà
+		 //Ð¾Ð¿Ñ€ÐµÐ´ÐµÐ»ÑÐµÐ¼ Ñ€Ð°Ð·Ð¼ÐµÑ€Ñ‹ Ð¾ÐºÐ½Ð°
 		 window_width=40 + 40*5*ctowers + (ctowers-1)*30 + 40;
 		 window_height=80+40*7+65;
-		 //âûäåëÿåì ïàìÿòü ïîä óêàçàòåëè íà áàøíè
+		 //Ð²Ñ‹Ð´ÐµÐ»ÑÐµÐ¼ Ð¿Ð°Ð¼ÑÑ‚ÑŒ Ð¿Ð¾Ð´ ÑƒÐºÐ°Ð·Ð°Ñ‚ÐµÐ»Ð¸ Ð½Ð° Ð±Ð°ÑˆÐ½Ð¸
 		 towers = new hanoy::tower[m];
 
-		 //ñîçäàåì êèñòè
-		 colors::towerPen0=CreatePen(PS_SOLID, 4, colors::tower0); //êîðè÷íåâûé
-		 colors::towerPen1=CreatePen(PS_SOLID, 4, colors::tower1); //çåëåíûé
-		 colors::linePen=CreatePen(PS_SOLID, 2, RGB(64, 0, 128)); //òåìíî-ñèíèé
+		 //ÑÐ¾Ð·Ð´Ð°ÐµÐ¼ ÐºÐ¸ÑÑ‚Ð¸
+		 colors::towerPen0=CreatePen(PS_SOLID, 4, colors::tower0); //ÐºÐ¾Ñ€Ð¸Ñ‡Ð½ÐµÐ²Ñ‹Ð¹
+		 colors::towerPen1=CreatePen(PS_SOLID, 4, colors::tower1); //Ð·ÐµÐ»ÐµÐ½Ñ‹Ð¹
+		 colors::linePen=CreatePen(PS_SOLID, 2, RGB(64, 0, 128)); //Ñ‚ÐµÐ¼Ð½Ð¾-ÑÐ¸Ð½Ð¸Ð¹
 		 
-		 colors::borderPen=CreatePen(PS_SOLID, 1, RGB(192, 192, 192)); //îáâîäêà
-		 colors::borderBrush=GetStockBrush(NULL_BRUSH); //çàëèâêà
+		 colors::borderPen=CreatePen(PS_SOLID, 1, RGB(192, 192, 192)); //Ð¾Ð±Ð²Ð¾Ð´ÐºÐ°
+		 colors::borderBrush=GetStockBrush(NULL_BRUSH); //Ð·Ð°Ð»Ð¸Ð²ÐºÐ°
 		 colors::selectBrush=CreateSolidBrush(colors::selectColor1);
 		 
-		 colors::ringBrush0=CreateSolidBrush(colors::ring0); //ñèíèé
-		 colors::ringBrush1=CreateSolidBrush(colors::ring1); //êðàñíûé
+		 colors::ringBrush0=CreateSolidBrush(colors::ring0); //ÑÐ¸Ð½Ð¸Ð¹
+		 colors::ringBrush1=CreateSolidBrush(colors::ring1); //ÐºÑ€Ð°ÑÐ½Ñ‹Ð¹
 
-		 //ñîçäàåì øðèôò
+		 //ÑÐ¾Ð·Ð´Ð°ÐµÐ¼ ÑˆÑ€Ð¸Ñ„Ñ‚
 		 LOGFONT font_type;
-		 ZeroMemory(&font_type, sizeof(font_type)); //îáíóëÿåì
+		 ZeroMemory(&font_type, sizeof(font_type)); //Ð¾Ð±Ð½ÑƒÐ»ÑÐµÐ¼
 		 font_type.lfHeight=18;
 		 font_type.lfWeight=FW_BOLD;
 		 strcpy(font_type.lfFaceName, "Tahoma"); //Tahoma, Georgia, Times New Roman  
@@ -45,12 +45,12 @@
 	 {
 		 nhod=0;
 		 
-		 //ðàçáðàñûâàåì êîëüöà
-		 unsigned position; //íîìåð áàøíè
+		 //Ñ€Ð°Ð·Ð±Ñ€Ð°ÑÑ‹Ð²Ð°ÐµÐ¼ ÐºÐ¾Ð»ÑŒÑ†Ð°
+		 unsigned position; //Ð½Ð¾Ð¼ÐµÑ€ Ð±Ð°ÑˆÐ½Ð¸
 		 srand(unsigned(time(NULL)));
-		 for(unsigned j=crings; j>0; j--) //êîëüöà ñ ñàìîãî áîëüøîãî äî ñàìîãî ìàëîãî
+		 for(unsigned j=crings; j>0; j--) //ÐºÐ¾Ð»ÑŒÑ†Ð° Ñ ÑÐ°Ð¼Ð¾Ð³Ð¾ Ð±Ð¾Ð»ÑŒÑˆÐ¾Ð³Ð¾ Ð´Ð¾ ÑÐ°Ð¼Ð¾Ð³Ð¾ Ð¼Ð°Ð»Ð¾Ð³Ð¾
 		 {
-			 position=rand()%ctowers; //âûáîð øòûðÿ
+			 position=rand()%ctowers; //Ð²Ñ‹Ð±Ð¾Ñ€ ÑˆÑ‚Ñ‹Ñ€Ñ
 			 towers[position].put(j);
 		 };
 	};
@@ -59,12 +59,12 @@
 	{
 		if (y>=80 && y<=80+40*7) {
 			for(unsigned j=0; j<ctowers; j++){
-				//ïðîâåðÿåì âõîäÿò ëè êîîðäèíàòû â ýòó áàøíþ
-				unsigned X=40+(5*40+30)*j; //íà÷àëî çîíû áàøíè
+				//Ð¿Ñ€Ð¾Ð²ÐµÑ€ÑÐµÐ¼ Ð²Ñ…Ð¾Ð´ÑÑ‚ Ð»Ð¸ ÐºÐ¾Ð¾Ñ€Ð´Ð¸Ð½Ð°Ñ‚Ñ‹ Ð² ÑÑ‚Ñƒ Ð±Ð°ÑˆÐ½ÑŽ
+				unsigned X=40+(5*40+30)*j; //Ð½Ð°Ñ‡Ð°Ð»Ð¾ Ð·Ð¾Ð½Ñ‹ Ð±Ð°ÑˆÐ½Ð¸
 				if (x>=X && x<=X+5*40) return j+1;
 			};
 		};
-		return 0; //íè÷åãî íå íàøëè
+		return 0; //Ð½Ð¸Ñ‡ÐµÐ³Ð¾ Ð½Ðµ Ð½Ð°ÑˆÐ»Ð¸
 	};
 
 	bool field::Move(unsigned p1, unsigned p2)
@@ -76,46 +76,46 @@
 		else return false;
 	};
 
-    void field::Show(HDC &hdc/*äåñêðèïòîð õîëñòà*/, RECT& drawRect/*çîíà îáíîâëåíèÿ*/) 
+    void field::Show(HDC &hdc/*Ð´ÐµÑÐºÑ€Ð¸Ð¿Ñ‚Ð¾Ñ€ Ñ…Ð¾Ð»ÑÑ‚Ð°*/, RECT& drawRect/*Ð·Ð¾Ð½Ð° Ð¾Ð±Ð½Ð¾Ð²Ð»ÐµÐ½Ð¸Ñ*/) 
 	{
 		RECT my_zone;
 		my_zone.left=40; my_zone.right=GetWindowWidth();
 		my_zone.top=80; my_zone.bottom=80+7*40+40;
-		if (isInRefreshZone(my_zone /*÷òî*/, drawRect /*çîíà*/)) {
-			//ðèñóåì áàøíè
+		if (isInRefreshZone(my_zone /*Ñ‡Ñ‚Ð¾*/, drawRect /*Ð·Ð¾Ð½Ð°*/)) {
+			//Ñ€Ð¸ÑÑƒÐµÐ¼ Ð±Ð°ÑˆÐ½Ð¸
 			unsigned x0, y0=80;
 			for(unsigned j=0; j<ctowers; j++) {
-				//îïðåäåëÿåì ïîäçîíó áàøíè
+				//Ð¾Ð¿Ñ€ÐµÐ´ÐµÐ»ÑÐµÐ¼ Ð¿Ð¾Ð´Ð·Ð¾Ð½Ñƒ Ð±Ð°ÑˆÐ½Ð¸
 				x0=40+(5*40+30)*j;
 				my_zone.left=x0; my_zone.right=x0+40*5;
 				my_zone.top=y0; my_zone.bottom=y0+40*7+40;
 
-				if (isInRefreshZone(my_zone /*÷òî*/, drawRect /*çîíà*/)){
+				if (isInRefreshZone(my_zone /*Ñ‡Ñ‚Ð¾*/, drawRect /*Ð·Ð¾Ð½Ð°*/)){
 					towers[j].Show(
-									hdc /*òî, íà ÷åì ðèñóåì*/, j /*íîìåð áàøíè*/,
-									colors::borderPen, /*îáâîäêà*/
+									hdc /*Ñ‚Ð¾, Ð½Ð° Ñ‡ÐµÐ¼ Ñ€Ð¸ÑÑƒÐµÐ¼*/, j /*Ð½Ð¾Ð¼ÐµÑ€ Ð±Ð°ÑˆÐ½Ð¸*/,
+									colors::borderPen, /*Ð¾Ð±Ð²Ð¾Ð´ÐºÐ°*/
 									(j+1==selectTower)?colors::selectBrush : colors::borderBrush,
-									(j%2)?colors::towerPen1 : colors::towerPen0, /*áàøíÿ*/
-									colors::ringBrush0, colors::ringBrush1, /*êîëüöà*/
+									(j%2)?colors::towerPen1 : colors::towerPen0, /*Ð±Ð°ÑˆÐ½Ñ*/
+									colors::ringBrush0, colors::ringBrush1, /*ÐºÐ¾Ð»ÑŒÑ†Ð°*/
 									hFont
 								  );
 				};//if
 			};
 		};
 
-		//ðèñóåì ñòðåëêó
+		//Ñ€Ð¸ÑÑƒÐµÐ¼ ÑÑ‚Ñ€ÐµÐ»ÐºÑƒ
 		if (selectTower && targetTower) {
 			SelectPen(hdc, colors::linePen);
-			//îïðåäåëÿåì êîîðäèíàòû
+			//Ð¾Ð¿Ñ€ÐµÐ´ÐµÐ»ÑÐµÐ¼ ÐºÐ¾Ð¾Ñ€Ð´Ð¸Ð½Ð°Ñ‚Ñ‹
 			const unsigned xfrom=140+230*(selectTower-1);
 			const unsigned xto=140+230*(targetTower-1);
 			const unsigned y0=80;
-			//ðèñóåì ëèíèþ
+			//Ñ€Ð¸ÑÑƒÐµÐ¼ Ð»Ð¸Ð½Ð¸ÑŽ
 			MoveToEx(hdc, xfrom, y0-1, NULL);
 			LineTo(hdc, xfrom, y0-50);
 			LineTo(hdc, xto, y0-50);
 			LineTo(hdc, xto, y0-1);
-			//ðèñóåì ñòðåëêó
+			//Ñ€Ð¸ÑÑƒÐµÐ¼ ÑÑ‚Ñ€ÐµÐ»ÐºÑƒ
 			LineTo(hdc, xto+10, y0-18);
 			LineTo(hdc, xto, y0-1);
 			LineTo(hdc, xto-10, y0-18);
@@ -123,7 +123,7 @@
 
 	};
 
-	bool field::isInRefreshZone(RECT &targetArea /*÷òî*/, RECT &refreshArea /*çîíà*/) const //òåñò íà íåîáõîäèìîñòü ïðîðèñîâêè
+	bool field::isInRefreshZone(RECT &targetArea /*Ñ‡Ñ‚Ð¾*/, RECT &refreshArea /*Ð·Ð¾Ð½Ð°*/) const //Ñ‚ÐµÑÑ‚ Ð½Ð° Ð½ÐµÐ¾Ð±Ñ…Ð¾Ð´Ð¸Ð¼Ð¾ÑÑ‚ÑŒ Ð¿Ñ€Ð¾Ñ€Ð¸ÑÐ¾Ð²ÐºÐ¸
 	{
 		return (refreshArea.left<=targetArea.right && refreshArea.right>=targetArea.left   &&   refreshArea.top<=targetArea.bottom && refreshArea.bottom>=targetArea.top);
 	};
