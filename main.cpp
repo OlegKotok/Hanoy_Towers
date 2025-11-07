@@ -4,6 +4,7 @@
 #include <sstream>
 //#include "colors.h"
 #include "game.h"
+#include "localization.h"
 #include <string.h>
 
 unsigned N=10, M=3; //количество колец и башен
@@ -56,7 +57,7 @@ int WINAPI WinMain(HINSTANCE hThisInstance /* дескриптор прилож�
     RegisterClassEx(&wc); //регестрируем класс окна
 
     //Создаем окно
-    main_window=CreateWindow( className, "Кольца наркоманов 2", /*имя класса и заголовок */
+    main_window=CreateWindow( className, g_localizer.GetA("window_title").c_str(), /*имя класса и заголовок */
 							  WS_OVERLAPPEDWINDOW, 35, 40, gamefield->GetWindowWidth()+10, gamefield->GetWindowHeight()+27, /* стиль окна, позиция и размеры */
                               HWND_DESKTOP, NULL /* No menu */, hThisInstance /*дескриптор приложения*/, NULL /*доп.данные*/
                              );
@@ -123,11 +124,13 @@ void OnDestroy(HWND hwnd)
 
 void ShowGameInfo()
 {
-	char msg[80]="Соберите все ";
-	char tmp[4]; _itoa(N, tmp, 10);
-	strcat(msg, tmp);
-	strcat(msg, " колец на последней (справа) башне!");
-	MessageBox(main_window, msg, "Кольца наркоманов 2", MB_OK|MB_ICONINFORMATION);
+	char msg[200];
+	std::string format = g_localizer.GetA("game_info");
+	sprintf(msg, format.c_str(), N);
+
+
+
+	MessageBox(main_window, msg, g_localizer.GetA("window_title").c_str(), MB_OK|MB_ICONINFORMATION);
 }
 
 //////////////////////////////////////////////////////////////////////////
@@ -164,12 +167,14 @@ void OnClick(HWND hwnd, BOOL fdbclick, int x, int y, UINT keyFlugs)
 
 				//тест на выиграш
 				if (gamefield->is_win()) {
-					char msg[80]="Поздравляем! Вы прошли игру за "; msg[12]='\n';
-					char tmp[4]; _itoa(gamefield->getTurnNumber(), tmp, 10);
-					strcat(msg, tmp);
-					strcat(msg, " ходов.");
+					char msg[200];
+					std::string format = g_localizer.GetA("win_message");
+					sprintf(msg, format.c_str(), gamefield->getTurnNumber());
 
-					MessageBox(main_window, msg, "Вы выиграли.", MB_OK|MB_ICONINFORMATION);
+
+
+
+					MessageBox(main_window, msg, g_localizer.GetA("win_title").c_str(), MB_OK|MB_ICONINFORMATION);
 				};
 			}
 			else {

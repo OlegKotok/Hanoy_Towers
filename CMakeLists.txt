@@ -8,6 +8,7 @@ set(SOURCES
     main.cpp
     game.cpp
     tower.cpp
+    localization.cpp
 )
 
 # Headers
@@ -15,6 +16,7 @@ set(HEADERS
     game.h
     tower.h
     colors.h
+    localization.h
 )
 
 # Create executable
