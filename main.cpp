@@ -1,4 +1,4 @@
-//скелет игры
+﻿//скелет игры
 #include <windows.h>
 #include <windowsx.h>
 #include <sstream>
@@ -57,7 +57,7 @@ int WINAPI WinMain(HINSTANCE hThisInstance /* дескриптор прилож�
     RegisterClassEx(&wc); //регестрируем класс окна
 
     //Создаем окно
-    main_window=CreateWindow( className, "Hanoi Towers", /*имя класса и заголовок */
+    main_window=CreateWindow( className, g_localizer.GetA("window_title").c_str(), /*имя класса и заголовок */
 							  WS_OVERLAPPEDWINDOW, 35, 40, gamefield->GetWindowWidth()+10, gamefield->GetWindowHeight()+27, /* стиль окна, позиция и размеры */
                               HWND_DESKTOP, NULL /* No menu */, hThisInstance /*дескриптор приложения*/, NULL /*доп.данные*/
                              );

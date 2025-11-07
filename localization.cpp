@@ -1,4 +1,4 @@
-#include "localization.h"
+﻿#include "localization.h"
 
 Localizer g_localizer;
 
