@@ -1,6 +1,6 @@
 # 🗼 Hanoi Towers - Classic Puzzle Game
 
-![Hanoi Towers Game](hanoi.gif)
+![Hanoi Towers Game](hanoi.png)
 
 A multi-level implementation of the classic Tower of Hanoi puzzle, written in pure C++ using exclusively Win32 API and GDI functions. This vintage game from 2008 demonstrates the power of native Windows programming - delivering maximum performance in an incredibly compact executable.
 
